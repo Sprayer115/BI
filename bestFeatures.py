@@ -68,7 +68,7 @@ def evaluate_model(x, y):
         {'penalty': ['l1'], 'C': [0.01, 0.1, 1, 10, 100], 'solver': ['liblinear', 'saga'], 'max_iter': [10000]},
         {'penalty': ['l2'], 'C': [0.01, 0.1, 1, 10, 100], 'solver': ['lbfgs', 'liblinear', 'saga'], 'max_iter': [10000]}
     ]
-    lr_grid = GridSearchCV(LogisticRegression(random_state=42), lr_params, cv=5)
+    lr_grid = GridSearchCV(LogisticRegression(random_state=42), lr_params, cv=5, n_jobs=-1)
     lr_grid.fit(x_train, y_train)
     lr_best = lr_grid.best_estimator_
 
@@ -79,7 +79,7 @@ def evaluate_model(x, y):
         'max_depth': [4, 6, 8],
         'criterion': ['gini', 'entropy']
     }
-    rf_grid = GridSearchCV(RandomForestClassifier(random_state=42), rf_params, cv=5)
+    rf_grid = GridSearchCV(RandomForestClassifier(random_state=42), rf_params, cv=5, n_jobs=-1)
     rf_grid.fit(x_train, y_train)
     rf_best = rf_grid.best_estimator_
 
